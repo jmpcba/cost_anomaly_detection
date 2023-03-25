@@ -12,26 +12,10 @@ variable "cost_threshold" {
   type        = number
 }
 
-variable "alert_type" {
-  description = "type of alert, email or slack message"
-  type        = string
-  default     = "SLACK"
-  validation {
-    condition     = contains(["EMAIL", "SLACK"], var.alert_type)
-    error_message = "alert_type must be EMAIL or SLACK"
-  }
-}
-
 variable "tags" {
   description = "Map of tags to apply to resources"
   type        = map(string)
   default     = {}
-}
-
-variable "subscription_email" {
-  description = "This is the email address that gets notified when an anomaly is detected."
-  type        = string
-  default     = ""
 }
 
 variable "slack_channel_id" {

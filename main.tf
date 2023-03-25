@@ -92,8 +92,8 @@ resource "aws_ce_anomaly_subscription" "anomaly_subscription" {
   ]
 
   subscriber {
-    type    = local.subscriber_type
-    address = local.subscriber_address
+    type    = "SNS"
+    address = aws_sns_topic.cost_anomaly_topic.arn
   }
 
   depends_on = [
@@ -105,7 +105,7 @@ resource "aws_ce_anomaly_subscription" "anomaly_subscription" {
 
 resource "awscc_chatbot_slack_channel_configuration" "chatbot_slack_channel" {
   count              = var.enable_slack_integration ? 1 : 0
-  configuration_name = "test-aws-alerts" #TODO: update this name
+  configuration_name = "cost-anomaly-alerts"
   iam_role_arn       = aws_iam_role.cost_anomaly_chatbot_role[0].arn
   slack_channel_id   = var.slack_channel_id
   slack_workspace_id = var.slack_workspace_id
@@ -113,7 +113,7 @@ resource "awscc_chatbot_slack_channel_configuration" "chatbot_slack_channel" {
 
 resource "aws_iam_role" "cost_anomaly_chatbot_role" {
   count = var.enable_slack_integration ? 1 : 0
-  name  = "anomalychatbotrole" #TODO:update this name
+  name  = "cost-anomaly-chatbot-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
