@@ -1,0 +1,5 @@
+monitor y laerta configurable
+enviar a SNS topic o mail
+usamr KMs para SNS
+agregar chatbot
+incluir un example
