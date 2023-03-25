@@ -1,4 +1,3 @@
-# cost_anomaly
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
