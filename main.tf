@@ -79,7 +79,7 @@ resource "aws_ce_anomaly_subscription" "anomaly_subscription" {
   name = "RealtimeAnomalySubscription"
   threshold_expression {
     dimension {
-      key           = "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
+      key           = local.threshold_expression_key
       values        = [var.cost_threshold]
       match_options = ["GREATER_THAN_OR_EQUAL"]
     }
@@ -100,4 +100,53 @@ resource "aws_ce_anomaly_subscription" "anomaly_subscription" {
     aws_sns_topic_policy.sns_topic_policy,
   ]
   tags = var.tags
+}
+
+
+resource "awscc_chatbot_slack_channel_configuration" "chatbot_slack_channel" {
+  count              = var.enable_slack_integration ? 1 : 0
+  configuration_name = "cost-anomaly-alerts"
+  iam_role_arn       = aws_iam_role.cost_anomaly_chatbot_role[0].arn
+  slack_channel_id   = var.slack_channel_id
+  slack_workspace_id = var.slack_workspace_id
+}
+
+resource "aws_iam_role" "cost_anomaly_chatbot_role" {
+  count = var.enable_slack_integration ? 1 : 0
+  name  = "cost-anomaly-chatbot-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "chatbot.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "slack_chatbot_policy" {
+  count = var.enable_slack_integration ? 1 : 0
+  name  = "AWS-Chatbot-NotificationsOnly-Policy"
+  role  = aws_iam_role.cost_anomaly_chatbot_role[0].id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "cloudwatch:Describe*",
+          "cloudwatch:Get*",
+          "cloudwatch:List*"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
 }
