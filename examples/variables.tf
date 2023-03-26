@@ -9,3 +9,8 @@ variable "slack_workspace_id" {
   type        = string
   default     = ""
 }
+
+variable "region" {
+  description = "AWS region"
+  type        = string
+}

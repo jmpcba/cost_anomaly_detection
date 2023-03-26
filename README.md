@@ -4,15 +4,15 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.60.0 |
-| <a name="requirement_awscc"></a> [awscc](#requirement\_awscc) | 0.48.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.60 |
+| <a name="requirement_awscc"></a> [awscc](#requirement\_awscc) | ~>0.48 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.60.0 |
-| <a name="provider_awscc"></a> [awscc](#provider\_awscc) | 0.48.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.60 |
+| <a name="provider_awscc"></a> [awscc](#provider\_awscc) | ~>0.48 |
 
 ## Modules
 
@@ -28,7 +28,7 @@ No modules.
 | [aws_iam_role_policy.slack_chatbot_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_sns_topic.cost_anomaly_topic](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic) | resource |
 | [aws_sns_topic_policy.sns_topic_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_policy) | resource |
-| [awscc_chatbot_slack_channel_configuration.chatbot_slack_channel](https://registry.terraform.io/providers/hashicorp/awscc/0.48.0/docs/resources/chatbot_slack_channel_configuration) | resource |
+| [awscc_chatbot_slack_channel_configuration.chatbot_slack_channel](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs/resources/chatbot_slack_channel_configuration) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.sns_topic_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 

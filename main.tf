@@ -109,10 +109,10 @@ resource "awscc_chatbot_slack_channel_configuration" "chatbot_slack_channel" {
   iam_role_arn       = aws_iam_role.cost_anomaly_chatbot_role[0].arn
   slack_channel_id   = var.slack_channel_id
   slack_workspace_id = var.slack_workspace_id
-  guardrail_policies = ["arn:aws:iam::aws:policy/ReadOnlyAccess",]
-  sns_topic_arns = [aws_sns_topic.cost_anomaly_topic.arn,]
+  guardrail_policies = ["arn:aws:iam::aws:policy/ReadOnlyAccess", ]
+  sns_topic_arns     = [aws_sns_topic.cost_anomaly_topic.arn, ]
 }
- 
+
 resource "aws_iam_role" "cost_anomaly_chatbot_role" {
   count = var.enable_slack_integration ? 1 : 0
   name  = "cost-anomaly-chatbot-role"
