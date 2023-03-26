@@ -13,7 +13,7 @@ variable "cost_threshold" {
 }
 
 variable "slack_channel_id" {
-  description = "right click on the channel name, select copy channel URL, and use the letters and number after the last /"
+  description = "right click on the channel name, copy channel URL, and use the letters and number after the last /"
   type        = string
   default     = ""
 }
