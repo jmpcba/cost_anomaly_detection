@@ -1,7 +1,7 @@
 resource "aws_sns_topic" "cost_anomaly_topic" {
-  name = "CostAnomalyUpdates"
+  name              = "CostAnomalyUpdates"
   kms_master_key_id = data.aws_kms_key.SNS_KMS_key.id
-  tags = var.tags
+  tags              = var.tags
 }
 
 data "aws_iam_policy_document" "sns_topic_policy_document" {
