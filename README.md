@@ -6,7 +6,7 @@ It creates a Cost Anomaly Monitor, a Cost Anomaly Subscription, a SNS topic, and
 
 **Cost Anomaly Subscription** send an alert to SNS when cost monitor detects an anomaly and a threshold is exceeded. The threshold is configurable and it can be a fixed amount or a percentage.
 
-**Before starting follow these [steps](docs/chatbot_slack_setup.pdf) to allow AWS to access your slack workspace**
+**Before starting follow these [steps](docs/configure_AWS_ChatBot_Integration.pdf) to allow AWS to access your slack workspace**
 
 ![diagram](docs/cost_monitor_diagram.png "diagram")
 
