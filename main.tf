@@ -1,6 +1,6 @@
 resource "aws_sns_topic" "cost_anomaly_topic" {
   name              = "CostAnomalyUpdates"
-  kms_master_key_id = data.aws_kms_key.SNS_KMS_key.id
+  kms_master_key_id = data.aws_kms_key.SNS_KMS_key.arn
   tags              = var.tags
 }
 
@@ -19,42 +19,6 @@ data "aws_iam_policy_document" "sns_topic_policy_document" {
     principals {
       type        = "Service"
       identifiers = ["costalerts.amazonaws.com"]
-    }
-
-    resources = [
-      aws_sns_topic.cost_anomaly_topic.arn,
-    ]
-  }
-
-  statement {
-    sid = "__default_statement_ID"
-
-    actions = [
-      "SNS:Subscribe",
-      "SNS:SetTopicAttributes",
-      "SNS:RemovePermission",
-      "SNS:Receive",
-      "SNS:Publish",
-      "SNS:ListSubscriptionsByTopic",
-      "SNS:GetTopicAttributes",
-      "SNS:DeleteTopic",
-      "SNS:AddPermission",
-    ]
-
-    condition {
-      test     = "StringEquals"
-      variable = "AWS:SourceOwner"
-
-      values = [
-        data.aws_caller_identity.current.account_id
-      ]
-    }
-
-    effect = "Allow"
-
-    principals {
-      type        = "AWS"
-      identifiers = ["*"]
     }
 
     resources = [
