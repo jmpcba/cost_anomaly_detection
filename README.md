@@ -1,3 +1,15 @@
+# Cost anomaly detection and alerting
+This module leverages [AWS Cost Anomaly Detector](https://aws.amazon.com/aws-cost-management/aws-cost-anomaly-detection/) to identify unusual cost patterns in AWS and notify them inmediately.
+It creates a Cost Anomaly Monitor, a Cost Anomaly Subscription, a SNS topic, and optionally a slack channel configuration on AWS ChatBot.
+
+**AWS Cost Anomaly Monitor** Monitors the AWS account for unexpected costs. This module uses AWS' recomended configuration to evaluate each of the services you use individually, allowing smaller anomalies to be detected. Anomaly thresholds are automatically adjusted based on your historical service spend patterns.
+
+**Cost Anomaly Subscription** send an alert to SNS when cost monitor detects an anomaly and a threshold is exceeded. The threshold is configurable and it can be a fixed amount or a percentage.
+
+**Before starting follow these [steps](docs/chatbot_slack_setup.pdf) to allow AWS to access your slack workspace**
+
+![diagram](docs/cost_monitor_diagram.png "diagram")
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -38,8 +50,8 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cost_threshold"></a> [cost\_threshold](#input\_cost\_threshold) | Defines the value to trigger an alert | `number` | n/a | yes |
 | <a name="input_enable_slack_integration"></a> [enable\_slack\_integration](#input\_enable\_slack\_integration) | If false, the module will create an SNS topic without an slack channel integration. Use it when another subscriber to the SNS topic is preffered | `bool` | `true` | no |
-| <a name="input_slack_channel_id"></a> [slack\_channel\_id](#input\_slack\_channel\_id) | right click on the channel name, copy channel URL, and use the letters and number after the last / | `string` | `""` | no |
-| <a name="input_slack_workspace_id"></a> [slack\_workspace\_id](#input\_slack\_workspace\_id) | ID of your slack slack\_workspace\_id | `string` | `""` | no |
+| <a name="input_slack_channel_id"></a> [slack\_channel\_id](#input\_slack\_channel\_id) | right click on the channel name, copy channel URL, and use the letters and number after the last / | `string` | n/a | yes |
+| <a name="input_slack_workspace_id"></a> [slack\_workspace\_id](#input\_slack\_workspace\_id) | ID of your slack slack\_workspace\_id | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Map of tags to apply to resources | `map(string)` | `{}` | no |
 | <a name="input_threshold_type"></a> [threshold\_type](#input\_threshold\_type) | especify if the alert with trigger based on a total amount or a percentage | `string` | n/a | yes |
 
