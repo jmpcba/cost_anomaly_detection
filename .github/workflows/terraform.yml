@@ -11,15 +11,10 @@ jobs:
         uses: aquasecurity/tfsec-action@v1.0.0
   
   tflint:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-
+    runs-on: ubuntu-latest
     steps:
-    #- uses: actions/checkout@v3
-    #  name: Checkout source code
+    - uses: actions/checkout@v3
+      name: Checkout source code
 
     - uses: actions/cache@v3
       name: Cache plugin dir
