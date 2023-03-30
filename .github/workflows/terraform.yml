@@ -16,9 +16,6 @@ jobs:
   tflint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      name: Checkout source code
-
     - uses: actions/cache@v3
       name: Cache plugin dir
       with:
